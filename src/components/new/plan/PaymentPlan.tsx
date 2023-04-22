@@ -4,6 +4,7 @@ import { Button, Form, Switch } from 'antd'
 import { PageHeader } from '../auth/header/PageHeader'
 import { PageContext } from '../../../context/PageContext'
 
+
 interface Props {
   onNextClick: () => any
   onBackClick: () => any
@@ -11,6 +12,10 @@ interface Props {
 
 export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
   const pageContext = React.useContext(PageContext)
+  const { state } = pageContext
+  const isYearly = state?.isYearly
+  console.log({ isYearly  })
+
   const [active, setActive] = useState(false)
   const [selected, setSelected] = useState<PaymentPlanList[]>([])
 
@@ -40,23 +45,23 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
     {
       id: 0,
       title: 'Arcade',
-      amount: '$9/mo',
+      amount: '$9',
       icon: <img src="../src/assets/images/icon-arcade.svg" alt="arcade" />,
-      duration: '2 months free',
+     
     },
     {
       id: 1,
       title: 'Advanced',
-      amount: '$12/mo',
+      amount: '$12',
       icon: <img src="../src/assets/images/icon-advanced.svg" alt="advanced" />,
-      duration: '2 months free',
+     
     },
     {
       id: 2,
       title: 'Pro',
-      amount: '$15/mo',
+      amount: '$15',
       icon: <img src="../src/assets/images/icon-pro.svg" alt="pro" />,
-      duration: '2 months free',
+    
     },
   ]
 
@@ -65,6 +70,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
     pageContext.dispatch({ type: 'isYearly', payload: active })
     onNextClick()
   }
+ 
 
   return (
     <div className="pt-10 p-5">
@@ -88,9 +94,9 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
                     <h3 className="font-bold text-[18px] text-blue-800 ">
                       {list.title}
                     </h3>
-                    <p className="text-gray-400 text-[14px]">{list.amount}</p>
+                    <p className="text-gray-400 text-[14px]">{list.amount}/{active ? 'yr' : 'mo'}</p>
                     <h3 className="text-blue-700 font-semibold mt-2">
-                      {list.duration}
+                    {active ? '2 months free' : ''}  
                     </h3>
                   </div>
                 </div>

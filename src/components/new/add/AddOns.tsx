@@ -36,19 +36,19 @@ export const AddOns = ({ onNextClick, onBackClick }: Props) => {
       id: 0,
       title: ' Online service',
       description: '  Access to multiplayer games',
-      amount: '+$1/mo',
+      amount: '+$1',
     },
     {
       id: 1,
       title: 'Larger storage',
       description: 'Extra 1TB cloud save',
-      amount: '+$1/mo',
+      amount: '+$1',
     },
     {
       id: 2,
       title: 'Customizable profile',
       description: 'Custom theme on your profile',
-      amount: '+$1/mo',
+      amount: '+$1',
     },
   ]
 

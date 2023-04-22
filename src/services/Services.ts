@@ -13,7 +13,7 @@ export type PaymentPlanList = {
     id: number;
     amount: string;
     icon: any;
-    duration: string;
+   
 };
 export type AddInfoList = {
     title: string;

@@ -16,53 +16,39 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
   console.log({ isYearly })
 
   const [active, setActive] = useState(false)
-  const [selected, setSelected] = useState<PaymentPlanList[]>([])
+  const [selected, setSelected] = useState<PaymentPlanList | undefined>()
 
   const handleClick = () => {
     setActive(!active)
   }
 
   const handleOnClick = (item: PaymentPlanList) => {
-    const res = findItem(item)
-    let updatedSelected: PaymentPlanList[] = selected
-    if (res) {
-      updatedSelected = selected.filter((e) => e.id != item.id)
-    } else {
-      updatedSelected = [...selected, item]
-    }
-    setSelected(updatedSelected)
-  }
-
-  const findItem = (item: PaymentPlanList): PaymentPlanList | undefined => {
-    return selected.find((i) => item.id === i.id)
-  }
-  const isSelected = (item: PaymentPlanList): boolean => {
-    return findItem(item) !== undefined
+    setSelected(item)
   }
 
   const items: PaymentPlanList[] = [
     {
       id: 0,
       title: 'Arcade',
-      amount: '$9',
+      amount: 9,
       icon: <img src="../src/assets/images/icon-arcade.svg" alt="arcade" />,
     },
     {
       id: 1,
       title: 'Advanced',
-      amount: '$12',
+      amount: 12,
       icon: <img src="../src/assets/images/icon-advanced.svg" alt="advanced" />,
     },
     {
       id: 2,
       title: 'Pro',
-      amount: '$15',
+      amount: 15,
       icon: <img src="../src/assets/images/icon-pro.svg" alt="pro" />,
     },
   ]
 
   const handleSubmit = () => {
-    if(selected.length<1){
+    if (selected === undefined) {
       return
     }
     pageContext.dispatch({ type: 'setPlans', payload: selected })
@@ -83,7 +69,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
               <div
                 key={list.id}
                 className="border p-5 rounded-xl cursor-pointer hover:border-blue-600 "
-                style={{ borderColor: isSelected(list) ? 'blue' : '' }}
+                style={{ borderColor: list.id === selected?.id ? 'blue' : '' }}
                 onClick={() => handleOnClick(list)}
               >
                 <div className="lg:block sm:flex">
@@ -93,7 +79,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
                       {list.title}
                     </h3>
                     <p className="text-gray-400 text-[14px]">
-                      {list.amount}/{active ? 'yr' : 'mo'}
+                      +${list.amount}/{active ? 'yr' : 'mo'}
                     </p>
                     <h3 className="text-blue-700 font-semibold mt-2">
                       {active ? '2 months free' : ''}
@@ -107,7 +93,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
         <div className="flex justify-center mt-10 mb-20 p-3 rounded- bg-gray-100 font-semibold">
           <span
             className="text-gray-700"
-            style={{ color: active ? 'blue' : 'darkgray' }}
+            style={{ color: active ? 'darkgray' : 'blue' }}
           >
             Monthly
           </span>
@@ -119,7 +105,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
           />
           <span
             className="text-gray-400"
-            style={{ color: active ? 'darkgray' : 'blue' }}
+            style={{ color: active ? 'blue' : 'darkgray' }}
           >
             Yearly
           </span>

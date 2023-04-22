@@ -27,7 +27,7 @@ const initialState = {
 }
 
 interface StateProp{
-  plans: PaymentPlanList[]
+  plans: PaymentPlanList
   addons: AddInfoList[]
   isYearly: boolean
 }

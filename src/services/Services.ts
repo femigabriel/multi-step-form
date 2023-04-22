@@ -11,7 +11,7 @@ export  type AuthList = {
 export type PaymentPlanList = {
     title: string;
     id: number;
-    amount: string;
+    amount: number;
     icon: any;
    
 };
@@ -19,7 +19,7 @@ export type AddInfoList = {
     title: string;
     id: number;
     description: string;
-    amount: string
+    amount: number
 };
 export type SummaryList = {
     title: string;

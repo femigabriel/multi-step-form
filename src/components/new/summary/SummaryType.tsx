@@ -1,6 +1,7 @@
 import { Button } from 'antd'
 import { PageContext } from '../../../context/PageContext'
 import React from 'react'
+import { AddInfoList } from '../../../services/Services'
 
 interface Props {
   onSuccessCallback: () => any
@@ -14,36 +15,36 @@ export const SummaryType = ({
   const { state } = pageContext
   const isYearly = state?.isYearly
   const addons = state?.addons
-  const plans = state?.plans
+  const plan = state?.plans
 
-  console.log({ addons, isYearly, plans })
+  const getTotal = (): number => {
+    const totalAddon =
+      addons?.reduce((a: number, b: AddInfoList) => a + b.amount, 0) || 0
+    const totalPlan = plan?.amount || 0
+    return totalAddon + totalPlan
+  }
   return (
     <div>
-    
       <div>
         <div className=" bg-[#1888880f] p-5 rounded-md">
-          {plans?.map((list) => {
-            return (
-              <div className="flex justify-between border border-b-gray-300  border-t-0 border-x-0">
-                <div className="mb-3 ">
-                  <h3 className="text-blue-800 font-bold text-[18px]">
-                    {list.title}
-                  </h3>
-                  <a
-                    href=""
-                    className="text-16px text-gray-400 underline cursor-pointer hover:text-blue-500"
-                  >
-                    Change
-                  </a>
-                </div>
-                <div className="mt-3">
-                  <h3 className="text-gray-700 font-bold text-[16px]">
-                    {list.amount}/{isYearly ? 'yr' : 'mo'}
-                  </h3>
-                </div>
-              </div>
-            )
-          })}
+          <div className="flex justify-between border border-b-gray-300  border-t-0 border-x-0">
+            <div className="mb-3 ">
+              <h3 className="text-blue-800 font-bold text-[18px]">
+                {plan?.title}
+              </h3>
+              <a
+                href=""
+                className="text-16px text-gray-400 underline cursor-pointer hover:text-blue-500"
+              >
+                Change
+              </a>
+            </div>
+            <div className="mt-3">
+              <h3 className="text-gray-700 font-bold text-[16px]">
+                {plan?.amount}/{isYearly ? 'yr' : 'mo'}
+              </h3>
+            </div>
+          </div>
           {addons?.map((list) => {
             return (
               <div className="">
@@ -58,8 +59,12 @@ export const SummaryType = ({
           })}
         </div>
         <div className="flex justify-between  p-5 mt-5 ">
-          <p className="text-gray-400">Total (per month)</p>
-          <h3 className="text-blue-800 font-bold">$120/yr</h3>
+          <p className="text-gray-400">
+            Total {isYearly ? '(year)' : '(month)'}
+          </p>
+          <h3 className="text-blue-800 font-bold">
+            ${getTotal()}/ {isYearly ? 'yr' : 'mo'}
+          </h3>
         </div>
       </div>
       <div className="flex pt-10 justify-between w-full">

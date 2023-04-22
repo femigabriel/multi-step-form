@@ -8,7 +8,7 @@ import { Mobile } from './Mobile'
 import { LeftSidebar } from './LeftSidebar'
 import { PaymentPlan } from '../new/plan/PaymentPlan'
 
-export const Pages = () => {
+export const Index = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
 
   const gotoNext = () => {
@@ -23,16 +23,12 @@ export const Pages = () => {
     switch (currentStepIndex) {
       case 0:
         return <PersonalInfoPage onNextClick={gotoNext} />
-        break
       case 1:
         return <PaymentPlan onNextClick={gotoNext} onBackClick={gotoPrevious} />
-        break
       case 2:
         return <AddOns onNextClick={gotoNext} onBackClick={gotoPrevious} />
-        break
       case 3:
         return <Summary onNextClick={gotoNext} onBackClick={gotoPrevious} />
-        break
       case 4:
         return <ThankYouPage />
       default:

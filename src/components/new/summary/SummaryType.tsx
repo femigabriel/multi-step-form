@@ -1,4 +1,6 @@
 import { Button } from 'antd'
+import { PageContext } from '../../../context/PageContext'
+import React from 'react'
 
 interface Props {
   onSuccessCallback: () => any
@@ -8,6 +10,13 @@ export const SummaryType = ({
   onSuccessCallback,
   onPreviousCallback,
 }: Props) => {
+  const pageContext = React.useContext(PageContext)
+  const { state } = pageContext
+  const isYearly = state?.isYearly
+  const addons = state?.addons
+  const plans = state?.plans
+
+  console.log({ addons, isYearly, plans })
   return (
     <div>
       <div className=" bg-[#1888880f] p-5 rounded-md">
@@ -15,8 +24,12 @@ export const SummaryType = ({
           <div className="mb-5">
             <h3 className="text-blue-800 font-bold text-[18px]">
               Arcade(Yearly)
+              {}
             </h3>
-            <a href="" className="text-16px text-gray-400 underline cursor-pointer hover:text-blue-500">
+            <a
+              href=""
+              className="text-16px text-gray-400 underline cursor-pointer hover:text-blue-500"
+            >
               Change
             </a>
           </div>

@@ -10,8 +10,8 @@ export const Summary = ({ onNextClick, onBackClick }: Props) => {
   return (
     <div className="pt-10 p-5">
       <PageHeader
-        title=" Pick add-ons"
-        description="Add-ons helps your gaming experience"
+        title="Finshing up"
+        description="Double check everything looks OK before confirming."
       />
       <div className="pt-10">
         <SummaryType onSuccessCallback={onNextClick} onPreviousCallback={onBackClick}/>

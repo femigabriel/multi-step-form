@@ -5,9 +5,13 @@ import './index.css'
 import './assets/fonts/Ubuntu-Bold.ttf'
 import './assets/fonts/Ubuntu-Medium.ttf'
 import './assets/fonts/Ubuntu-Regular.ttf'
+import PageContext from './context/PageContext'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <PageContext>
+      <App />
+    </PageContext>
+    ,
   </React.StrictMode>,
 )

@@ -3,6 +3,7 @@ import { PageHeader } from '../auth/header/PageHeader'
 import React, { useState } from 'react'
 import { Button } from 'antd'
 import { AddInfoList } from '../../../services/Services'
+import { PageContext } from '../../../context/PageContext'
 
 interface Props {
   onNextClick: () => any
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export const AddOns = ({ onNextClick, onBackClick }: Props) => {
+  const pageContext = React.useContext(PageContext)
   const [active, setActive] = useState<AddInfoList[]>([])
 
   const handleClick = (item: AddInfoList) => {
@@ -49,6 +51,11 @@ export const AddOns = ({ onNextClick, onBackClick }: Props) => {
       amount: '+$1/mo',
     },
   ]
+
+  const handleSubmit = () => {
+    pageContext.dispatch({ type: 'addons', payload: active })
+    onNextClick()
+  }
 
   return (
     <div className="pt-10 p-5">
@@ -101,7 +108,7 @@ export const AddOns = ({ onNextClick, onBackClick }: Props) => {
 
           <Button
             className=" bg-blue-950 text-white h-[40px] px-5 hover:text-white"
-            onClick={onNextClick}
+            onClick={handleSubmit}
             htmlType="submit"
           >
             Next Step

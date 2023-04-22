@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { PaymentPlanList } from '../../../services/Services'
 import { Button, Form, Switch } from 'antd'
 import { PageHeader } from '../auth/header/PageHeader'
+import { PageContext } from '../../../context/PageContext'
 
 interface Props {
   onNextClick: () => any
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
+  const pageContext = React.useContext(PageContext)
   const [active, setActive] = useState(false)
   const [selected, setSelected] = useState<PaymentPlanList[]>([])
 
@@ -18,11 +20,13 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
 
   const handleOnClick = (item: PaymentPlanList) => {
     const res = findItem(item)
+    let updatedSelected: PaymentPlanList[] = selected
     if (res) {
-      setSelected(selected.filter((e) => e.id != item.id))
+      updatedSelected = selected.filter((e) => e.id != item.id)
     } else {
-      setSelected((current) => [...current, item])
+      updatedSelected = [...selected, item]
     }
+    setSelected(updatedSelected)
   }
 
   const findItem = (item: PaymentPlanList): PaymentPlanList | undefined => {
@@ -56,6 +60,12 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
     },
   ]
 
+  const handleSubmit = () => {
+    pageContext.dispatch({ type: 'setPlans', payload: selected })
+    pageContext.dispatch({ type: 'isYearly', payload: active })
+    onNextClick()
+  }
+
   return (
     <div className="pt-10 p-5">
       <PageHeader
@@ -63,7 +73,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
         description="You havethe option of monthly or yearly billing"
       />
       <div>
-        <div className="lg:grid gap-5 grid-cols-3 pt-10 sm:block">
+        <div className="lg:grid gap-5 grid-cols-3 pt-10 sm:block ">
           {items.map((list) => {
             return (
               <div
@@ -118,9 +128,9 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
           </Button>
 
           <Button
-            className=" bg-blue-950 text-white float-right h-[45px] px-5"
+            className=" bg-blue-950 text-white float-right h-[45px] px-5 hover:text-white"
             htmlType="submit"
-            onClick={onNextClick}
+            onClick={handleSubmit}
           >
             Next Step
           </Button>

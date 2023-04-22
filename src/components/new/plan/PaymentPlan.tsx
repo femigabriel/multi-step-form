@@ -31,7 +31,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
       id: 0,
       title: 'Arcade',
       amount: 9,
-      icon: <img src="../src/assets/images/icon-arcade.svg" alt="arcade" />,
+      icon: <img src="../src/assets/images/icon-arcade.svg" className='plan_icon' alt="arcade" />,
     },
     {
       id: 1,
@@ -68,13 +68,13 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
             return (
               <div
                 key={list.id}
-                className="border p-5 rounded-xl cursor-pointer hover:border-blue-600 "
+                className="border p-5 rounded-xl cursor-pointer hover:border-blue-600 plan_card"
                 style={{ borderColor: list.id === selected?.id ? 'blue' : '' }}
                 onClick={() => handleOnClick(list)}
               >
-                <div className="lg:block sm:flex">
+                <div className="plan_container">
                   <div className="mb-14">{list.icon}</div>
-                  <div className="lg:pl-0 sm:pl-5">
+                  <div className=" plan_content" >
                     <h3 className="font-bold text-[18px] text-blue-800 ">
                       {list.title}
                     </h3>

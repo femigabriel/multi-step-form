@@ -87,3 +87,24 @@ label {
 :where(.css-dev-only-do-not-override-1mqg3i0).ant-switch.ant-switch-checked {
   background: #172554;
 }
+.plan_container {
+  display: block;
+}
+@media screen and (max-width: 720px) {
+  .plan_container {
+    display: flex;
+  }
+  .plan_icon {
+    width: 45px;
+    height: 45px;
+  }
+}
+@media screen and (max-width: 720px) {
+  .plan_content {
+    padding-left: 10px;
+  }
+  .plan_card{
+    height: 100px;
+    margin-bottom: 20px;
+  }
+}

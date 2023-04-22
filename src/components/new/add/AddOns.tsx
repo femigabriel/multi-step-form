@@ -53,6 +53,9 @@ export const AddOns = ({ onNextClick, onBackClick }: Props) => {
   ]
 
   const handleSubmit = () => {
+    if(active.length<1){
+      return
+    }
     pageContext.dispatch({ type: 'addons', payload: active })
     onNextClick()
   }
@@ -98,21 +101,19 @@ export const AddOns = ({ onNextClick, onBackClick }: Props) => {
           })}
         </div>
         <div className="flex pt-10 justify-between w-full">
-          <Button
-            className=" bg-white text-gray-400 h-[40px] px-5"
+          <button
+            className=" bg-white text-[#172554]  h-[40px] px-5 rounded-md border"
             onClick={onBackClick}
-            htmlType="submit"
           >
             Go Back
-          </Button>
+          </button>
 
-          <Button
-            className=" bg-blue-950 text-white h-[40px] px-5 hover:text-white"
+          <button
+            className=" bg-blue-950 text-white float-right p-2 px-5 rounded-md"
             onClick={handleSubmit}
-            htmlType="submit"
           >
             Next Step
-          </Button>
+          </button>
         </div>
       </div>
     </div>

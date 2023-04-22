@@ -4,7 +4,6 @@ import { Button, Form, Switch } from 'antd'
 import { PageHeader } from '../auth/header/PageHeader'
 import { PageContext } from '../../../context/PageContext'
 
-
 interface Props {
   onNextClick: () => any
   onBackClick: () => any
@@ -14,7 +13,7 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
   const pageContext = React.useContext(PageContext)
   const { state } = pageContext
   const isYearly = state?.isYearly
-  console.log({ isYearly  })
+  console.log({ isYearly })
 
   const [active, setActive] = useState(false)
   const [selected, setSelected] = useState<PaymentPlanList[]>([])
@@ -47,30 +46,29 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
       title: 'Arcade',
       amount: '$9',
       icon: <img src="../src/assets/images/icon-arcade.svg" alt="arcade" />,
-     
     },
     {
       id: 1,
       title: 'Advanced',
       amount: '$12',
       icon: <img src="../src/assets/images/icon-advanced.svg" alt="advanced" />,
-     
     },
     {
       id: 2,
       title: 'Pro',
       amount: '$15',
       icon: <img src="../src/assets/images/icon-pro.svg" alt="pro" />,
-    
     },
   ]
 
   const handleSubmit = () => {
+    if(selected.length<1){
+      return
+    }
     pageContext.dispatch({ type: 'setPlans', payload: selected })
     pageContext.dispatch({ type: 'isYearly', payload: active })
     onNextClick()
   }
- 
 
   return (
     <div className="pt-10 p-5">
@@ -94,9 +92,11 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
                     <h3 className="font-bold text-[18px] text-blue-800 ">
                       {list.title}
                     </h3>
-                    <p className="text-gray-400 text-[14px]">{list.amount}/{active ? 'yr' : 'mo'}</p>
+                    <p className="text-gray-400 text-[14px]">
+                      {list.amount}/{active ? 'yr' : 'mo'}
+                    </p>
                     <h3 className="text-blue-700 font-semibold mt-2">
-                    {active ? '2 months free' : ''}  
+                      {active ? '2 months free' : ''}
                     </h3>
                   </div>
                 </div>
@@ -125,21 +125,19 @@ export const PaymentPlan = ({ onNextClick, onBackClick }: Props) => {
           </span>
         </div>
         <div className="flex pt- justify-between w-full">
-          <Button
+          <button
+            className=" bg-white text-[#172554] h-[40px] px-5 rounded-md border"
             onClick={onBackClick}
-            className=" bg-white text-gray-400 float-right"
-            htmlType="submit"
           >
             Go Back
-          </Button>
+          </button>
 
-          <Button
-            className=" bg-blue-950 text-white float-right h-[45px] px-5 hover:text-white"
-            htmlType="submit"
+          <button
+            className=" bg-blue-950 text-white p-2 px-5 rounded-md"
             onClick={handleSubmit}
           >
             Next Step
-          </Button>
+          </button>
         </div>
       </div>
     </div>

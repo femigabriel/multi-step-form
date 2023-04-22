@@ -12,11 +12,12 @@ export const PersonalInfoForm = ({ onSuccessCallback }: Props) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    if (name.length == 0 || email.length == 0 || phone.length == 0) {
+    if (!name || !email || !phone) {
       setError(true)
+      return
     }
-    console.log({ name, email, phone })
     onSuccessCallback()
+    e.preventDefault()
   }
 
   return (

@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { AuthList } from '../../../../services/Services'
 export const PageHeader = (props: AuthList) => {
+  
+
   return (
     <div className="">
       <h1 className=" text-gray-700 text-[24px] font-bold">{props.title}</h1>

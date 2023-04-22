@@ -40,13 +40,13 @@ export const Index = () => {
     <>
       <div className="page p-5">
         <div className=" flex">
-          <LeftSidebar users={page} />
+          <LeftSidebar curentId={currentStepIndex} />
           <div className="w-full pl-10 pr-10">{renderCurrentSelection()}</div>
         </div>
       </div>
       <div className="mobile_header">
         <div className="pl-3 pr-3">
-          <Mobile />
+          <Mobile  curentId={currentStepIndex}/>
           <div className="w-full bg-white pb-10 pl-3 pr-3">
             {renderCurrentSelection()}
           </div>

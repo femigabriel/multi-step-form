@@ -19,8 +19,7 @@ export const SummaryType = ({
   console.log({ addons, isYearly, plans })
   return (
     <div>
-      {/* {plans?.map((list) => {
-        return ( */}
+    
       <div>
         <div className=" bg-[#1888880f] p-5 rounded-md">
           {plans?.map((list) => {
@@ -63,24 +62,20 @@ export const SummaryType = ({
           <h3 className="text-blue-800 font-bold">$120/yr</h3>
         </div>
       </div>
-      {/* )
-      })}  */}
       <div className="flex pt-10 justify-between w-full">
-        <Button
-          className=" bg-white text-gray-400  h-[40px] px-5"
-          htmlType="submit"
+        <button
+          className=" bg-white text-[#172554]  h-[40px] px-5 rounded-md border"
           onClick={onPreviousCallback}
         >
           Go Back
-        </Button>
+        </button>
 
-        <Button
-          className=" bg-blue-600 text-white  h-[40px] px-5"
-          htmlType="submit"
+        <button
+          className=" bg-blue-600 text-white  h-[40px] px-5 rounded-md"
           onClick={onSuccessCallback}
         >
           Confirm
-        </Button>
+        </button>
       </div>
     </div>
   )
